@@ -344,7 +344,7 @@
 </div>
 
 <footer class="ft">
-  <div class="ft-links"><span class="copy">© 2026</span><a href="https://github.com/anubhavgautam/quintessence-design-system">GitHub ↗</a><a href="https://anubhavg.com">anubhavg.com ↗</a></div>
+  <div class="ft-links"><span class="copy">© 2026</span><a href="https://github.com/anubhavgautam/quintessence-design-system">GitHub ↗</a><a href="https://anubhavg.com">anubhavg.com ↗</a><a href="https://github.com/anubhavgautam/quintessence-design-system/blob/main/LICENSE">MIT</a></div>
   <span class="stamp">
     <svg class="stamp__mark" viewBox="1.5 4 21 13.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="2.5" y1="6" x2="21.5" y2="6"/><g transform="rotate(-6.5 7.25 6)"><rect x="6.35" y="4.8" width="1.8" height="2.4" rx=".4"/><rect x="4" y="7.8" width="6.5" height="9.2" rx="1"/></g><g transform="rotate(4 16.75 6)"><rect x="15.85" y="4.8" width="1.8" height="2.4" rx=".4"/><rect x="13.5" y="7.8" width="6.5" height="9.2" rx="1"/></g></svg>
     <span class="stamp__text"><span class="label">Quintessence · v1.1</span><span class="stamp__time">Extracted from anubhavg.com</span></span>
@@ -666,7 +666,7 @@ const code = (name, src) => {
   return '<figure class="code">' + (name ? '<figcaption class="label">' + name + '</figcaption>' : '') + '<pre>' + s + '</pre></figure>';
 };
 const REPO = 'https://github.com/anubhavgautam/quintessence-design-system';
-const CDN = 'https://cdn.jsdelivr.net/gh/anubhavgautam/quintessence-design-system@1.1.0/dist';
+const CDN = 'https://cdn.jsdelivr.net/gh/anubhavgautam/quintessence-design-system@v1.1.0/dist';
 
 P['start'] = { crumb: ['Getting started'], title: 'Using Quintessence', lede: 'Quintessence is a small, opinionated system for sites where photographs are the content. This is how to put it on a page, build inside its rules, and know when you are done.', body: `
 <section class="s" id="box"><h2 class="sh">What’s in the box</h2><div class="prose"><p>Two files do the work. Nothing needs a build step, a package manager, or a framework — though all three are welcome.</p></div>
@@ -689,7 +689,7 @@ git submodule add ${REPO}.git vendor/quintessence`)}</div>
 
 # in your entry file
 import 'quintessence-design-system/dist/quintessence.css';`)}</div>
-<div class="way"><span class="label">Link it</span><h3>From a CDN</h3><p>Two tags, nothing to install. jsDelivr serves the repository directly — this route works once the repository is public.</p>${code('', `<script src="${CDN}/quintessence.js"><\/script>
+<div class="way"><span class="label">Link it</span><h3>From a CDN</h3><p>Two tags, nothing to install. jsDelivr serves the repository directly; pin the tag.</p>${code('', `<script src="${CDN}/quintessence.js"><\/script>
 <link rel="stylesheet" href="${CDN}/quintessence.css">`)}</div>
 </div></section>
 

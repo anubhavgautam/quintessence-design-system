@@ -2,7 +2,7 @@
 
 The tokens and primitives behind [anubhavg.com](https://anubhavg.com), packaged so another page can use them. Photographs first; a tactile, neumorphic chrome that recedes; the vocabulary of the darkroom for everything that isn't a picture.
 
-Two files, no build step, no dependencies.
+Two files, no build step, no dependencies. **Read the docs at [anubhavgautam.github.io/quintessence-design-system](https://anubhavgautam.github.io/quintessence-design-system/).**
 
 | File | What it is |
 | --- | --- |
@@ -26,7 +26,7 @@ git submodule add https://github.com/anubhavgautam/quintessence-design-system.gi
 # then link vendor/quintessence/dist/quintessence.css and .js
 ```
 
-Also available as `npm i github:anubhavgautam/quintessence-design-system#v1.1.0` (import `quintessence-design-system/dist/quintessence.css`) or from jsDelivr at `https://cdn.jsdelivr.net/gh/anubhavgautam/quintessence-design-system@1.1.0/dist/quintessence.css`.
+Also available as `npm i github:anubhavgautam/quintessence-design-system#v1.1.0` (import `quintessence-design-system/dist/quintessence.css`) or from jsDelivr at `https://cdn.jsdelivr.net/gh/anubhavgautam/quintessence-design-system@v1.1.0/dist/quintessence.css`.
 
 ## Put it on a page
 
@@ -65,3 +65,18 @@ Light is the default. Dark applies with `<html data-theme="dark">`, or when the 
 ## Versioning
 
 Tags follow semver. Token values and class names are the public API; a changed token value is a minor bump, a removed token or class is a major one. The changelog is in the docs.
+
+## Contributing
+
+Fork it, improve it, open a pull request. A change is ready when it:
+
+- reads tokens only — no hex, millisecond, or pixel radius outside `:root`;
+- works in both themes and under reduced motion;
+- keeps the grammar: raised is pressable, recessed is not;
+- comes with its page in `docs/index.html` if it adds or changes a component.
+
+Bugs and ideas go in [Issues](https://github.com/anubhavgautam/quintessence-design-system/issues).
+
+## License
+
+[MIT](LICENSE) — use it, change it, ship it; keep the copyright line.
