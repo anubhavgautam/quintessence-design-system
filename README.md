@@ -11,7 +11,24 @@ Two files, no build step, no dependencies.
 | `docs/index.html` | The design-system site — principles, design language, components, patterns, tokens, and a Getting started section. Single file; open it from disk. |
 | `examples/starter.html` | A page that uses everything above, in the right order. |
 
-## Use it
+## Clone and use
+
+```bash
+git clone https://github.com/anubhavgautam/quintessence-design-system.git
+open quintessence-design-system/examples/starter.html   # a working page — start editing here
+open quintessence-design-system/docs/index.html         # the reference site
+```
+
+Nothing to install and nothing to build: the starter links `../dist/` with relative paths and runs from disk. To use the system in a project of your own, either copy `dist/` in next to your pages, or pin it as a submodule so you can pull updates:
+
+```bash
+git submodule add https://github.com/anubhavgautam/quintessence-design-system.git vendor/quintessence
+# then link vendor/quintessence/dist/quintessence.css and .js
+```
+
+Also available as `npm i github:anubhavgautam/quintessence-design-system#v1.1.0` (import `quintessence-design-system/dist/quintessence.css`) or from jsDelivr at `https://cdn.jsdelivr.net/gh/anubhavgautam/quintessence-design-system@1.1.0/dist/quintessence.css`.
+
+## Put it on a page
 
 Four things in `<head>`, in this order, then one `<div>` last in `<body>`:
 
@@ -32,12 +49,6 @@ Four things in `<head>`, in this order, then one `<div>` last in `<body>`:
 ```html
 <div class="grain" aria-hidden="true"></div>   <!-- 5. last child of <body> -->
 ```
-
-Three ways to get the files:
-
-- **Copy** — `cp -r dist/ your-site/quintessence/` and link with relative paths, as the starter does.
-- **npm from GitHub** — `npm i github:anubhavgautam/quintessence-design-system#v1.1.0`, then `import 'quintessence-design-system/dist/quintessence.css'`.
-- **CDN** — `https://cdn.jsdelivr.net/gh/anubhavgautam/quintessence-design-system@1.1.0/dist/quintessence.css` (works once this repository is public).
 
 The full walkthrough — install order, wiring the theme switch, the kit, a worked example, and a ship checklist — is the **Getting started** section of `docs/index.html`.
 

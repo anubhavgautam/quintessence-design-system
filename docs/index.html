@@ -682,14 +682,15 @@ ${dd('<p>Portfolio and gallery sites, where the picture is the point.</p><p>Smal
 
 <section class="s" id="ways"><h2 class="sh">Three ways in</h2>
 <div class="ways">
-<div class="way"><span class="label">Link it</span><h3>From a CDN</h3><p>Two tags, nothing to install. jsDelivr serves the repository directly — this route works once the repository is public.</p>${code('', `<script src="${CDN}/quintessence.js"><\/script>
-<link rel="stylesheet" href="${CDN}/quintessence.css">`)}</div>
+<div class="way"><span class="label">Clone it</span><h3>From the repository</h3><p>Nothing to install or build. Clone, open <code>examples/starter.html</code>, start editing. In a project of your own, pin it as a submodule and link <code>dist/</code> with relative paths.</p>${code('', `git clone ${REPO}.git
+# or, pinned inside your project:
+git submodule add ${REPO}.git vendor/quintessence`)}</div>
 <div class="way"><span class="label">Install it</span><h3>From GitHub, via npm</h3><p>Pin a tag. Then import the stylesheet wherever your bundler collects CSS and copy the script into your HTML head.</p>${code('', `npm i github:anubhavgautam/quintessence-design-system#v1.1.0
 
 # in your entry file
 import 'quintessence-design-system/dist/quintessence.css';`)}</div>
-<div class="way"><span class="label">Copy it</span><h3>Two files, vendored</h3><p>The honest option for a site with no build. Copy <code>dist/</code> next to your pages and link it with relative paths, as the starter does.</p>${code('', `git clone ${REPO}
-cp -r quintessence-design-system/dist ./quintessence`)}</div>
+<div class="way"><span class="label">Link it</span><h3>From a CDN</h3><p>Two tags, nothing to install. jsDelivr serves the repository directly — this route works once the repository is public.</p>${code('', `<script src="${CDN}/quintessence.js"><\/script>
+<link rel="stylesheet" href="${CDN}/quintessence.css">`)}</div>
 </div></section>
 
 <section class="s" id="first"><h2 class="sh">The first page</h2><div class="prose"><p>This is <code>examples/starter.html</code> with the furniture removed. The order in <code>&lt;head&gt;</code> is the whole trick: the script runs before anything paints, so the visitor never sees the wrong theme; your own styles come last so they win ties.</p></div>
