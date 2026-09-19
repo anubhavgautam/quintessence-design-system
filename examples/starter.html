@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starter · Quintessence</title>
+
+  <!-- 1. The runtime, first and inline-blocking, so the theme is set before paint. -->
+  <script src="../dist/quintessence.js"></script>
+
+  <!-- 2. The typeface. The stylesheet names DM Sans but does not load it. -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+
+  <!-- 3. The system. -->
+  <link rel="stylesheet" href="../dist/quintessence.css">
+
+  <!-- 4. Your page. Read tokens; never write a value the system already names. -->
+  <style>
+    .page { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-16); }
+    .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding-bottom: var(--space-5); border-bottom: 1px solid var(--rule); }
+    .brand { display: inline-flex; align-items: baseline; gap: var(--space-3); }
+    .brand b { font-size: var(--font-size-xl); font-weight: 500; letter-spacing: var(--tracking-display); }
+    .hero { padding: var(--space-16) 0 var(--space-10); }
+    .hero h1 { font-size: clamp(34px, 5vw, 56px); letter-spacing: var(--tracking-display); max-width: 14ch; }
+    .hero p { margin-top: var(--space-4); color: var(--text-secondary); max-width: 52ch; font-size: var(--font-size-lg); }
+    .row { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-6); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-5); margin-top: var(--space-10); }
+    .series { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); }
+    .series__cover { aspect-ratio: 1 / 1.236; border-radius: var(--radius-card); background: var(--bg-card-image); }
+    .series__line { display: flex; align-items: baseline; gap: var(--space-3); }
+    .series__title { flex: 1; font-size: var(--font-size-lg); font-weight: 500; letter-spacing: var(--tracking-title); }
+    .foot { margin-top: var(--space-16); padding-top: var(--space-6); border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="bar">
+      <a class="brand" href="#"><b>quintessence</b><span class="label">Starter</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle colour theme" aria-pressed="false">
+        <span class="theme-toggle__knob" aria-hidden="true"></span>
+      </button>
+    </header>
+
+    <section class="hero" data-reveal>
+      <p class="label">A page built on the system</p>
+      <h1>Photographs first. Chrome that recedes.</h1>
+      <p>Everything on this page reads a token. Raised surfaces can be pressed; recessed ones cannot. Switch the theme — nothing here names a colour.</p>
+      <div class="row">
+        <button class="btn-neu pill" type="button">Open the album</button>
+        <button class="btn-neu circle circle--sm" type="button" aria-label="Share">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 10H7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-1.5"/><line x1="12" y1="14" x2="12" y2="3.5"/><polyline points="8.5 7 12 3.5 15.5 7"/></svg>
+        </button>
+        <span class="badge badge--analogue">Analogue</span>
+        <span class="badge badge--digital">Digital</span>
+      </div>
+    </section>
+
+    <div class="grid">
+      <article class="panel series" data-reveal>
+        <div class="series__cover" role="img" aria-label="Cover placeholder"></div>
+        <div class="series__line"><span class="numeral">01</span><span class="series__title">Highlands</span><span class="numeral">2026</span></div>
+      </article>
+      <article class="panel series reveal-delay-1" data-reveal>
+        <div class="series__cover" role="img" aria-label="Cover placeholder"></div>
+        <div class="series__line"><span class="numeral">02</span><span class="series__title">Nippon's Vesuvius?</span><span class="numeral">2025</span></div>
+      </article>
+      <article class="panel series reveal-delay-2" data-reveal>
+        <div class="series__cover" role="img" aria-label="Cover placeholder"></div>
+        <div class="series__line"><span class="numeral">03</span><span class="series__title">Amsterdam, wet</span><span class="numeral">2025</span></div>
+      </article>
+    </div>
+
+    <footer class="foot">
+      <span class="label">Quintessence · 1.1</span>
+      <span class="label">Raised is pressable</span>
+    </footer>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+</body>
+</html>

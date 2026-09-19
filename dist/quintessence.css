@@ -1,0 +1,384 @@
+/*! Quintessence Design System 1.1.0 — https://github.com/anubhavgautam/quintessence-design-system
+ *  The tokens and primitives behind anubhavg.com. No build step, no dependencies.
+ *
+ *  Load DM Sans yourself (400/500/600) — the stylesheet only names it:
+ *  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+ *
+ *  Theme model: light is the default. Dark applies when <html data-theme="dark">,
+ *  or when the OS prefers dark and no explicit data-theme is set. quintessence.js
+ *  stamps the attribute pre-paint (saved choice, else time of day) so the two
+ *  never disagree. Components read semantic tokens only — never a literal.
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   1. PRIMITIVE TOKENS — theme-independent
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --color-neutral-100: #e5e5e5;
+  --color-neutral-400: #999999;
+  --color-neutral-600: #666666;
+  --color-neutral-900: #202020;
+  --color-white:       #ffffff;
+
+  --font-family-sans:  'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-size-xs:      12px;
+  --font-size-sm:      14px;
+  --font-size-base:    16px;
+  --font-size-lg:      18px;
+  --font-size-xl:      20px;
+  --font-size-label:   10.5px;   /* uppercase captions: eyebrows, stamps, index lines */
+
+  --line-height-tight:  1.15;
+  --line-height-normal: 1.55;
+
+  /* Type voices: display pulls tight, labels push wide, body rests. */
+  --tracking-display: -0.02em;
+  --tracking-title:   -0.01em;
+  --tracking-label:    0.12em;
+
+  /* Spacing — 4px base. */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-5: 20px;  --space-6: 24px;  --space-8: 32px;  --space-9: 36px;
+  --space-10: 40px; --space-12: 48px; --space-15: 60px; --space-16: 64px;
+  --space-18: 72px;
+
+  --page-padding:      calc(var(--space-15) * 2);
+  --grid-gap:          calc(var(--space-15) * 0.75);
+  --grid-vertical-gap: calc(var(--space-18) * 0.75);
+
+  /* Radius by role: chip < photograph < panel; pill for controls. */
+  --radius-chip:  8px;
+  --radius-card:  10px;
+  --radius-panel: 14px;
+  --radius-pill:  999px;
+
+  /* Circular control sizes: icon actions / menu items / the one floating control. */
+  --control-sm: 36px;
+  --control-md: 42px;
+  --control-lg: 46px;
+
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Durations — every transition resolves to one of these. */
+  --dur-press:  60ms;    /* snap-down of a press */
+  --dur-hover:  220ms;   /* hover lift, toast, focus — the default */
+  --dur-bloom:  260ms;   /* hamburger fold, menu items arriving */
+  --dur-settle: 380ms;   /* toggle knob travel (with --ease-back) */
+  --dur-theme:  600ms;   /* ground + ink cross-fade between themes */
+  --dur-reveal: 900ms;   /* scroll-reveal fade-up */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   2. SEMANTIC TOKENS — light (default)
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --bg-page:        #ececef;
+  --bg-card:        #f4f4f6;
+  --bg-card-image:  var(--color-neutral-100);
+  --text-primary:   var(--color-neutral-900);
+  --text-secondary: var(--color-neutral-600);
+  --text-muted:     var(--color-neutral-600);
+  --rule:           rgba(0, 0, 0, 0.1);
+
+  /* Raised surface — anything with this can be pressed. */
+  --neu-bg:         linear-gradient(145deg, #ffffff, #e6e6ea);
+  --neu-bg-active:  linear-gradient(145deg, #e6e6ea, #ffffff);
+  --neu-shadow:
+    5px 5px 12px rgba(163, 163, 173, 0.45),
+    -3px -3px 8px rgba(255, 255, 255, 0.9);
+  --neu-shadow-hover:
+    7px 7px 16px rgba(163, 163, 173, 0.5),
+    -4px -4px 10px rgba(255, 255, 255, 1);
+  --neu-shadow-active:
+    inset 2px 2px 6px rgba(163, 163, 173, 0.32),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.55);
+
+  /* Recessed surface — holds state or a read-only label; never pressable. */
+  --well-bg:        linear-gradient(145deg, #e3e3e8, #efeff1);
+  --well-shadow:
+    inset 2px 2px 5px rgba(148, 148, 158, 0.5),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.95);
+  --toggle-track:   #b6b6bd;
+
+  /* Frosted chrome (floating pill, sticky bars). */
+  --frost:          rgba(236, 236, 239, 0.72);
+
+  --icon-emboss-down: rgba(0, 0, 0, 0.2);
+  --icon-emboss-up:   rgba(255, 255, 255, 0.85);
+
+  /* The one accent, tuned per ground. */
+  --brand-orange:   #C84520;
+  /* Film marker — the Analogue badge's dot. */
+  --analogue-red:   #b23a3a;
+
+  --grain-opacity:  0.24;
+  --grain-filter:   invert(1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   3. SEMANTIC TOKENS — dark. Two entry points, one set of values:
+      (a) the OS prefers dark and nothing explicit was stamped;
+      (b) <html data-theme="dark">, which also beats an OS that prefers light.
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-page:        #0a0a0a;
+    --bg-card:        var(--color-neutral-900);
+    --bg-card-image:  var(--color-neutral-900);
+    --text-primary:   var(--color-white);
+    --text-secondary: var(--color-neutral-400);
+    --text-muted:     var(--color-neutral-600);
+    --rule:           rgba(255, 255, 255, 0.08);
+    --neu-bg:         linear-gradient(145deg, #1d1d1d, #131313);
+    --neu-bg-active:  linear-gradient(145deg, #131313, #1d1d1d);
+    --neu-shadow:        5px 5px 12px rgba(0, 0, 0, 0.55), -3px -3px 8px rgba(255, 255, 255, 0.03);
+    --neu-shadow-hover:  7px 7px 16px rgba(0, 0, 0, 0.62), -4px -4px 10px rgba(255, 255, 255, 0.04);
+    --neu-shadow-active: inset 2px 2px 6px rgba(0, 0, 0, 0.42), inset -1px -1px 3px rgba(255, 255, 255, 0.04);
+    --well-bg:        linear-gradient(145deg, #131313, #1d1d1d);
+    --well-shadow:    inset 2px 2px 6px rgba(0, 0, 0, 0.42), inset -1px -1px 3px rgba(255, 255, 255, 0.04);
+    --toggle-track:   #050505;
+    --frost:          rgba(10, 10, 10, 0.72);
+    --icon-emboss-down: rgba(0, 0, 0, 0.9);
+    --icon-emboss-up:   rgba(255, 255, 255, 0.4);
+    --brand-orange:   #F76337;
+    --analogue-red:   #cd5650;
+    --grain-opacity:  0.22;
+    --grain-filter:   none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg-page:        #0a0a0a;
+  --bg-card:        var(--color-neutral-900);
+  --bg-card-image:  var(--color-neutral-900);
+  --text-primary:   var(--color-white);
+  --text-secondary: var(--color-neutral-400);
+  --text-muted:     var(--color-neutral-600);
+  --rule:           rgba(255, 255, 255, 0.08);
+  --neu-bg:         linear-gradient(145deg, #1d1d1d, #131313);
+  --neu-bg-active:  linear-gradient(145deg, #131313, #1d1d1d);
+  --neu-shadow:        5px 5px 12px rgba(0, 0, 0, 0.55), -3px -3px 8px rgba(255, 255, 255, 0.03);
+  --neu-shadow-hover:  7px 7px 16px rgba(0, 0, 0, 0.62), -4px -4px 10px rgba(255, 255, 255, 0.04);
+  --neu-shadow-active: inset 2px 2px 6px rgba(0, 0, 0, 0.42), inset -1px -1px 3px rgba(255, 255, 255, 0.04);
+  --well-bg:        linear-gradient(145deg, #131313, #1d1d1d);
+  --well-shadow:    inset 2px 2px 6px rgba(0, 0, 0, 0.42), inset -1px -1px 3px rgba(255, 255, 255, 0.04);
+  --toggle-track:   #050505;
+  --frost:          rgba(10, 10, 10, 0.72);
+  --icon-emboss-down: rgba(0, 0, 0, 0.9);
+  --icon-emboss-up:   rgba(255, 255, 255, 0.4);
+  --brand-orange:   #F76337;
+  --analogue-red:   #cd5650;
+  --grain-opacity:  0.22;
+  --grain-filter:   none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   4. RESET + BASE
+   ═══════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--dur-theme) var(--ease-out), color var(--dur-theme) var(--ease-out);
+}
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body { min-height: 100vh; overflow-x: hidden; }
+
+a, button, [role="button"], label, summary, input, select, textarea { touch-action: manipulation; }
+img, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { background: none; border: none; cursor: pointer; color: inherit; font: inherit; }
+code, kbd, pre { font-family: var(--font-family-mono); }
+
+h1, h2, h3, h4, h5, h6 { font-weight: 500; line-height: var(--line-height-tight); }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* One focus ring everywhere, in the ink of the current theme. */
+:focus-visible { outline: 1px solid var(--text-primary); outline-offset: 4px; }
+::selection { background: var(--brand-orange); color: #ffffff; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   5. PRIMITIVES — the grammar: raised is pressable, recessed is not.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Raised, pressable surface. Put it on a <button> or <a>. */
+.btn-neu {
+  background: var(--neu-bg);
+  box-shadow: var(--neu-shadow);
+  border: 0;
+  color: var(--text-primary);
+  transition:
+    box-shadow var(--dur-hover) var(--ease-out),
+    transform var(--dur-hover) var(--ease-out),
+    background var(--dur-hover) var(--ease-out);
+}
+.btn-neu:hover,
+.btn-neu:focus-visible { box-shadow: var(--neu-shadow-hover); transform: translateY(-1px); }
+/* Held state (a toggle that is on): inset, but at base level. */
+.btn-neu[aria-pressed="true"] {
+  box-shadow: var(--neu-shadow-active);
+  background: var(--neu-bg-active);
+  transform: translateY(0);
+}
+/* Transient press: snap down fast, ease back on release. */
+.btn-neu:active {
+  box-shadow: var(--neu-shadow-active);
+  background: var(--neu-bg-active);
+  transform: translateY(1.5px) scale(0.96);
+  transition:
+    box-shadow var(--dur-press) ease-out,
+    transform var(--dur-press) ease-out,
+    background var(--dur-press) ease-out;
+}
+@media (hover: none) {
+  .btn-neu.is-touch-active {
+    box-shadow: var(--neu-shadow-active);
+    background: var(--neu-bg-active);
+    transform: translateY(1.5px) scale(0.96);
+  }
+}
+
+/* Circular control — combine with .btn-neu. Three sizes, no others. */
+.circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-pill); flex-shrink: 0;
+}
+.circle svg { display: block; }
+.circle--sm { width: var(--control-sm); height: var(--control-sm); }
+.circle--md { width: var(--control-md); height: var(--control-md); }
+.circle--lg { width: var(--control-lg); height: var(--control-lg); }
+.circle--sm svg, .circle--md svg { width: 18px; height: 18px; }
+.circle--lg svg { width: 20px; height: 20px; }
+
+/* Pill — a raised control that carries words. Combine with .btn-neu. */
+.pill {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  border-radius: var(--radius-pill); padding: 9px 16px;
+  font-size: var(--font-size-sm); font-weight: 500; white-space: nowrap;
+}
+
+/* Raised surface that holds a group of content. Not pressable by itself. */
+.panel {
+  border-radius: var(--radius-panel);
+  background: var(--neu-bg);
+  box-shadow: var(--neu-shadow);
+}
+
+/* Recessed surface — a track, a label, a status. Never a button. */
+.well {
+  border-radius: var(--radius-panel);
+  background: var(--well-bg);
+  box-shadow: var(--well-shadow);
+}
+
+/* Frosted chrome for anything that floats over a photograph. */
+.frost {
+  background: var(--frost);
+  -webkit-backdrop-filter: blur(14px) saturate(115%);
+  backdrop-filter: blur(14px) saturate(115%);
+}
+
+/* The label voice: uppercase, tracked wide, muted, tabular. */
+.label {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--font-size-label);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Contact-sheet numeral: order, never meaning — so always muted. */
+.numeral { font-variant-numeric: tabular-nums; color: var(--text-muted); font-size: var(--font-size-xs); }
+
+/* Medium badge: a well with a 6px dot as the sole carrier of identity. */
+.badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs); font-weight: 500; letter-spacing: 0.02em; line-height: 1;
+  padding: 7px 13px; white-space: nowrap;
+  color: var(--text-secondary);
+  background: var(--well-bg); box-shadow: var(--well-shadow);
+}
+.badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--text-secondary); transform: translateY(0.12em);
+}
+.badge--analogue::before { background: var(--analogue-red); }
+.badge--digital::before  { background: var(--text-primary); }
+
+/* Theme switch: a sunk track, a raised knob. aria-pressed="true" means dark. */
+.theme-toggle {
+  position: relative; display: block;
+  width: 60px; height: 30px;
+  border-radius: var(--radius-pill);
+  background-color: var(--toggle-track);
+  box-shadow: var(--neu-shadow-active);
+  --knob-x: 0;
+  transition: box-shadow var(--dur-hover) var(--ease-out), background-color var(--dur-theme) var(--ease-out);
+}
+.theme-toggle[aria-pressed="true"] { --knob-x: 30px; }
+.theme-toggle__knob {
+  position: absolute; top: 3px; left: 3px; width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--neu-bg); box-shadow: var(--neu-shadow);
+  transform: translateX(var(--knob-x));
+  transition: transform var(--dur-settle) var(--ease-back), box-shadow 200ms ease-out;
+}
+.theme-toggle:active .theme-toggle__knob {
+  box-shadow: var(--neu-shadow-active);
+  transform: translateX(var(--knob-x)) scale(0.94);
+}
+
+/* Film grain. One per page, last in <body>; keep page content at z-index 1. */
+.grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: var(--grain-opacity);
+  filter: var(--grain-filter);
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.95 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.85'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Reveal on scroll. Gated on html.qs-js (set by quintessence.js) so content
+   is never hidden when the script is absent. The script adds .is-in once. */
+.qs-js [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.qs-js [data-reveal].is-in { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { --reveal-delay: 80ms; }
+.reveal-delay-2 { --reveal-delay: 160ms; }
+.reveal-delay-3 { --reveal-delay: 240ms; }
+
+/* Visually hidden, still read aloud. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   6. REDUCED MOTION — everything snaps, nothing is withheld.
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .qs-js [data-reveal] { opacity: 1; transform: none; }
+}
