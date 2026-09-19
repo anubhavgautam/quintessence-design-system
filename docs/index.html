@@ -278,13 +278,14 @@
   .steps h3{font-size:15.5px;font-weight:500;letter-spacing:var(--tracking-title);margin-bottom:6px}
   .steps p{font-size:14px;line-height:1.55;color:var(--text-secondary);max-width:62ch}
   .steps .code{margin:10px 0 0}
-  .ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:14px 0}
-  .way{display:flex;flex-direction:column;gap:8px;border:1px solid var(--rule);border-radius:var(--radius-panel);padding:18px 20px 20px;min-width:0}
+  .ways{display:flex;flex-direction:column;gap:14px;margin:14px 0}
+  .way{display:grid;grid-template-columns:minmax(200px,280px) minmax(0,1fr);gap:28px;align-items:center;border:1px solid var(--rule);border-radius:var(--radius-panel);padding:20px 22px}
+  .way__text{display:flex;flex-direction:column;gap:6px;min-width:0}
   .way h3{font-size:16px;font-weight:500;letter-spacing:var(--tracking-title)}
-  .way p{font-size:13.5px;line-height:1.5;color:var(--text-secondary);flex:1}
-  .way .code{margin:6px 0 0}
-  .way .code pre{font-size:11.5px}
-  @media (max-width:900px){.ways{grid-template-columns:1fr}}
+  .way p{font-size:13.5px;line-height:1.5;color:var(--text-secondary)}
+  .way .code{margin:0;min-width:0}
+  .way .code pre{font-size:12px}
+  @media (max-width:760px){.way{grid-template-columns:1fr;gap:12px}}
   table.t--plain td:first-child{font-family:var(--font-sans);font-size:13.5px;white-space:normal}
   table.t--check td:first-child{font-weight:500}
   .well{border-radius:var(--radius-panel);background:var(--well-bg);box-shadow:var(--well-shadow)}
@@ -682,14 +683,14 @@ ${dd('<p>Portfolio and gallery sites, where the picture is the point.</p><p>Smal
 
 <section class="s" id="ways"><h2 class="sh">Three ways in</h2>
 <div class="ways">
-<div class="way"><span class="label">Clone it</span><h3>From the repository</h3><p>Nothing to install or build. Clone, open <code>examples/starter.html</code>, start editing. In a project of your own, pin it as a submodule and link <code>dist/</code> with relative paths.</p>${code('', `git clone ${REPO}.git
+<div class="way"><div class="way__text"><span class="label">Clone it</span><h3>From the repository</h3><p>Nothing to install or build. Clone, open <code>examples/starter.html</code>, start editing. In a project of your own, pin it as a submodule and link <code>dist/</code> with relative paths.</p></div>${code('', `git clone ${REPO}.git
 # or, pinned inside your project:
 git submodule add ${REPO}.git vendor/quintessence`)}</div>
-<div class="way"><span class="label">Install it</span><h3>From GitHub, via npm</h3><p>Pin a tag. Then import the stylesheet wherever your bundler collects CSS and copy the script into your HTML head.</p>${code('', `npm i github:anubhavgautam/quintessence-design-system#v1.1.0
+<div class="way"><div class="way__text"><span class="label">Install it</span><h3>From GitHub, via npm</h3><p>Pin a tag. Then import the stylesheet wherever your bundler collects CSS and copy the script into your HTML head.</p></div>${code('', `npm i github:anubhavgautam/quintessence-design-system#v1.1.0
 
 # in your entry file
 import 'quintessence-design-system/dist/quintessence.css';`)}</div>
-<div class="way"><span class="label">Link it</span><h3>From a CDN</h3><p>Two tags, nothing to install. jsDelivr serves the repository directly; pin the tag.</p>${code('', `<script src="${CDN}/quintessence.js"><\/script>
+<div class="way"><div class="way__text"><span class="label">Link it</span><h3>From a CDN</h3><p>Two tags, nothing to install. jsDelivr serves the repository directly; pin the tag.</p></div>${code('', `<script src="${CDN}/quintessence.js"><\/script>
 <link rel="stylesheet" href="${CDN}/quintessence.css">`)}</div>
 </div></section>
 
