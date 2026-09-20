@@ -279,13 +279,12 @@
   .steps p{font-size:14px;line-height:1.55;color:var(--text-secondary);max-width:62ch}
   .steps .code{margin:10px 0 0}
   .ways{display:flex;flex-direction:column;gap:14px;margin:14px 0}
-  .way{display:grid;grid-template-columns:minmax(200px,280px) minmax(0,1fr);gap:28px;align-items:center;border:1px solid var(--rule);border-radius:var(--radius-panel);padding:20px 22px}
-  .way__text{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .way{display:flex;flex-direction:column;gap:14px;border:1px solid var(--rule);border-radius:var(--radius-panel);padding:20px 22px 22px}
+  .way__text{display:flex;flex-direction:column;gap:6px;max-width:66ch}
   .way h3{font-size:16px;font-weight:500;letter-spacing:var(--tracking-title)}
   .way p{font-size:13.5px;line-height:1.5;color:var(--text-secondary)}
   .way .code{margin:0;min-width:0}
   .way .code pre{font-size:12px}
-  @media (max-width:760px){.way{grid-template-columns:1fr;gap:12px}}
   table.t--plain td:first-child{font-family:var(--font-sans);font-size:13.5px;white-space:normal}
   table.t--check td:first-child{font-weight:500}
   .well{border-radius:var(--radius-panel);background:var(--well-bg);box-shadow:var(--well-shadow)}
