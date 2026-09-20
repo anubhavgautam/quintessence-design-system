@@ -266,9 +266,11 @@
   .dead code{font-size:12px;color:var(--text-muted);text-decoration:line-through;text-decoration-color:var(--analogue-red)}
 
   /* ═══ Getting started: code, steps, ways, live example ═══ */
-  .code{margin:14px 0;border-radius:var(--radius-panel);background:var(--well-bg);box-shadow:var(--well-shadow);overflow:hidden}
+  .code{position:relative;margin:14px 0;border-radius:var(--radius-panel);background:var(--well-bg);box-shadow:var(--well-shadow)}
   .code figcaption{display:block;padding:11px 16px 0}
-  .code pre{padding:13px 16px 15px;overflow-x:auto;font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text-primary);tab-size:2;scrollbar-width:thin}
+  .code pre{padding:13px 84px 15px 16px;overflow-x:auto;border-radius:var(--radius-panel);font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text-primary);tab-size:2;scrollbar-width:thin}
+  .code__copy{position:absolute;top:9px;right:9px;border-radius:var(--radius-pill);padding:5px 11px;font-size:11.5px;font-weight:500;line-height:1.2;color:var(--text-secondary)}
+  .code__copy.is-done{color:var(--text-primary)}
   .code pre .c{color:var(--text-muted)}
   .dd__col .code{margin:4px 0 0}
   .dd__col .code pre{font-size:12px}
@@ -663,7 +665,7 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, 
 const code = (name, src) => {
   let s = esc(src.replace(/^\n/, '').replace(/\n\s*$/, ''));
   s = s.replace(/(&lt;!--[\s\S]*?--&gt;|\/\*[\s\S]*?\*\/|(^|\s)#(?!\w).*$|(^|[^:])\/\/.*$)/gm, (m) => '<span class="c">' + m + '</span>');
-  return '<figure class="code">' + (name ? '<figcaption class="label">' + name + '</figcaption>' : '') + '<pre>' + s + '</pre></figure>';
+  return '<figure class="code">' + (name ? '<figcaption class="label">' + name + '</figcaption>' : '') + '<pre>' + s + '</pre><button class="code__copy btn-neu" type="button" aria-live="polite">Copy</button></figure>';
 };
 const REPO = 'https://github.com/anubhavgautam/quintessence-design-system';
 const CDN = 'https://cdn.jsdelivr.net/gh/anubhavgautam/quintessence-design-system@v1.1.0/dist';
@@ -932,6 +934,15 @@ const flipTheme = () => { root.dataset.theme = isDark() ? 'light' : 'dark'; sync
 $('#themeToggle').addEventListener('click', flipTheme);
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncTheme);
 syncTheme();
+
+/* copy buttons on code snippets */
+$('#main').addEventListener('click', (e) => {
+  const b = e.target.closest('.code__copy'); if (!b) return;
+  const pre = b.closest('.code').querySelector('pre');
+  const done = (label) => { b.textContent = label; b.classList.add('is-done'); clearTimeout(b._t); b._t = setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('is-done'); }, 1600); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(pre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); let ok = false; try { ok = document.execCommand('copy'); } catch (_) {} done(ok ? 'Copied' : 'Selected'); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(pre.textContent).then(() => done('Copied'), fallback); else fallback();
+});
 
 /* mobile menu */
 $('#menuBtn').addEventListener('click', () => { const o = $('#side').classList.toggle('is-open'); $('#menuBtn').setAttribute('aria-expanded', String(o)); });
