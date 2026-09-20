@@ -268,9 +268,11 @@
   /* ═══ Getting started: code, steps, ways, live example ═══ */
   .code{position:relative;margin:14px 0;border-radius:var(--radius-panel);background:var(--well-bg);box-shadow:var(--well-shadow)}
   .code figcaption{display:block;padding:11px 16px 0}
-  .code pre{padding:13px 84px 15px 16px;overflow-x:auto;border-radius:var(--radius-panel);font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text-primary);tab-size:2;scrollbar-width:thin}
-  .code__copy{position:absolute;top:9px;right:9px;border-radius:var(--radius-pill);padding:5px 11px;font-size:11.5px;font-weight:500;line-height:1.2;color:var(--text-secondary)}
+  .code pre{padding:13px 60px 15px 16px;overflow-x:auto;border-radius:var(--radius-panel);font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text-primary);tab-size:2;scrollbar-width:thin}
+  .code__copy{position:absolute;top:8px;right:8px;color:var(--text-secondary)}
+  .code__copy svg{width:16px;height:16px}
   .code__copy.is-done{color:var(--text-primary)}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .code pre .c{color:var(--text-muted)}
   .dd__col .code{margin:4px 0 0}
   .dd__col .code pre{font-size:12px}
@@ -370,6 +372,8 @@ const ICON = {
   pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21z"/><circle cx="12" cy="10.3" r="2.3"/></svg>',
   cal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14.5" rx="2.4"/><line x1="4" y1="9.8" x2="20" y2="9.8"/><line x1="8.5" y1="3.2" x2="8.5" y2="6.2"/><line x1="15.5" y1="3.2" x2="15.5" y2="6.2"/></svg>',
   cam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 7.5l1.1-2a1 1 0 0 1 .87-.5h3.06a1 1 0 0 1 .87.5l1.1 2"/><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><circle cx="12" cy="13.75" r="3.25"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.2"/><path d="M15 9V6.2A2.2 2.2 0 0 0 12.8 4H6.2A2.2 2.2 0 0 0 4 6.2v6.6A2.2 2.2 0 0 0 6.2 15H9"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   arrowL: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
   arrowR: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   logo: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4zM4 20.2c0-3.6 3.6-6.2 8-6.2s8 2.6 8 6.2V21H4v-.8z"/></svg>',
@@ -665,7 +669,7 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, 
 const code = (name, src) => {
   let s = esc(src.replace(/^\n/, '').replace(/\n\s*$/, ''));
   s = s.replace(/(&lt;!--[\s\S]*?--&gt;|\/\*[\s\S]*?\*\/|(^|\s)#(?!\w).*$|(^|[^:])\/\/.*$)/gm, (m) => '<span class="c">' + m + '</span>');
-  return '<figure class="code">' + (name ? '<figcaption class="label">' + name + '</figcaption>' : '') + '<pre>' + s + '</pre><button class="code__copy btn-neu" type="button" aria-live="polite">Copy</button></figure>';
+  return '<figure class="code">' + (name ? '<figcaption class="label">' + name + '</figcaption>' : '') + '<pre>' + s + '</pre><button class="code__copy btn-neu circle circle--sm" type="button" aria-live="polite">' + ICON.copy + '<span class="sr-only">Copy</span></button></figure>';
 };
 const REPO = 'https://github.com/anubhavgautam/quintessence-design-system';
 const CDN = 'https://cdn.jsdelivr.net/gh/anubhavgautam/quintessence-design-system@v1.1.0/dist';
@@ -939,7 +943,7 @@ syncTheme();
 $('#main').addEventListener('click', (e) => {
   const b = e.target.closest('.code__copy'); if (!b) return;
   const pre = b.closest('.code').querySelector('pre');
-  const done = (label) => { b.textContent = label; b.classList.add('is-done'); clearTimeout(b._t); b._t = setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('is-done'); }, 1600); };
+  const done = (label) => { b.innerHTML = ICON.check + '<span class="sr-only">' + label + '</span>'; b.classList.add('is-done'); clearTimeout(b._t); b._t = setTimeout(() => { b.innerHTML = ICON.copy + '<span class="sr-only">Copy</span>'; b.classList.remove('is-done'); }, 1600); };
   const fallback = () => { const r = document.createRange(); r.selectNodeContents(pre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); let ok = false; try { ok = document.execCommand('copy'); } catch (_) {} done(ok ? 'Copied' : 'Selected'); };
   if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(pre.textContent).then(() => done('Copied'), fallback); else fallback();
 });
